@@ -1,17 +1,17 @@
 import { Router } from 'express';
+import gamesController from '../controller/gamesController.js';
 
 const gamesRouter = Router();
 
-gamesRouter.get('/', (req, res) => {
-  console.log('get home page');
-});
+// Home
+gamesRouter.get('/', gamesController.homepageGet);
 
-gamesRouter.get('/new', (req, res) => {
-  console.log('display form to insert new video game with name, description, category');
-});
+// Items
+gamesRouter.get('/addItem', gamesController.addItemGet);
+gamesRouter.post('/addItem', gamesController.addItemPost);
 
-gamesRouter.post('/new', (req, res) => {
-  console.log('video game to be saved: ', req.body.name);
-});
+// Genre
+gamesRouter.get('/genre', gamesController.addGenreGet);
+gamesRouter.get('/genre', gamesController.addGenrePost);
 
 export default gamesRouter;
