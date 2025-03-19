@@ -1,11 +1,15 @@
-const genreGet = (req, res) => {
-  res.render('genre', {
+const genreViewGet = (req, res) => {
+  res.render('genres/genreView', {
     title: 'Genre',
   });
 };
 
-const genrePost = (req, res) => {
+const genreAddGet = (req, res) => {
   const { genre } = req.body;
 };
 
-export default { genreGet, genrePost };
+const genreAddPost = (req, res) => {
+  const { genre } = req.body;
+};
+
+export default { genreViewGet, genreAddGet, genreAddPost };

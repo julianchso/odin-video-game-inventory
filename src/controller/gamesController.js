@@ -1,28 +1,11 @@
-const homepageGet = (req, res) => {
-  res.render('home', {
-    title: 'Video Game Inventory',
-  });
-};
-
 const gamesGet = (req, res) => {
-  res.render('itemAdd', {
+  res.render('games/gameView', {
     title: 'Add Video Game',
   });
 };
 
-const addGamePost = (req, res) => {
+const gamesPost = (req, res) => {
   const { videoGame } = req.body;
 };
 
-const addGenreGet = (req, res) => {
-  const { genre } = req.body;
-  res.render('genreAdd', {
-    title: 'Add Genre',
-  });
-};
-
-const addGenrePost = (req, res) => {
-  const { Genre } = req.body;
-};
-
-export default { homepageGet, gamesGet, addGamePost, addGenreGet, addGenrePost };
+export default { gamesGet, gamesPost };
