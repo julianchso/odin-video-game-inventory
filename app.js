@@ -1,5 +1,5 @@
 import express, { urlencoded } from 'express';
-import gamesRouter from './server/src/routes/gamesRouter.js';
+import gamesRouter from './src/routes/gamesRouter.js';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 
@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/server/src/view'));
+app.set('views', path.join(__dirname, '/src/view'));
 app.use(urlencoded({ extended: true }));
 app.use('/', gamesRouter);
 

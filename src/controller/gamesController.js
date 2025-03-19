@@ -4,13 +4,13 @@ const homepageGet = (req, res) => {
   });
 };
 
-const addItemGet = (req, res) => {
+const gamesGet = (req, res) => {
   res.render('itemAdd', {
     title: 'Add Video Game',
   });
 };
 
-const addItemPost = (req, res) => {
+const addGamePost = (req, res) => {
   const { videoGame } = req.body;
 };
 
@@ -25,4 +25,4 @@ const addGenrePost = (req, res) => {
   const { Genre } = req.body;
 };
 
-export default { homepageGet, addItemGet, addItemPost, addGenreGet, addGenrePost };
+export default { homepageGet, gamesGet, addGamePost, addGenreGet, addGenrePost };
