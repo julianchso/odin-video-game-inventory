@@ -5,5 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
   </head>
-  <body></body>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+    <ul>
+      <% if (locals.games) {%> <% games.forEach(game => { %>
+      <li>Game: <%= game.video_game_name %></li>
+      <%}); %> <%} %>
+    </ul>
+  </body>
 </html>

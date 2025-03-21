@@ -5,7 +5,9 @@ const genreViewGet = (req, res) => {
 };
 
 const genreAddGet = (req, res) => {
-  const { genre } = req.body;
+  res.render('genres/genreAdd', {
+    title: 'Add a genre',
+  });
 };
 
 const genreAddPost = (req, res) => {

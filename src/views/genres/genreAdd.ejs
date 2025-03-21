@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <%- include('../partials/nav.ejs') %>
+    <h1><%= title %></h1>
+    <form action="/new" method="POST">
+      <label for="Genre">Genre: </label>
+      <input type="text" id="genre" name="genre" required />
+      <label for="genreImg">Add Genre Image: </label>
+      <input type="file" name="genreImg" accept="image/png, image/gif, image/jpeg" />
+      <button type="submit">Add Genre</button>
+    </form>
+  </body>
+</html>
