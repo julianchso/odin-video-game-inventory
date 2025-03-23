@@ -3,7 +3,7 @@ import genreController from '../controller/genreController.js';
 
 const genreRouter = Router();
 
-genreRouter.get('/', genreController.genreViewGet);
+genreRouter.get('/', genreController.genreGet);
 genreRouter.get('/add', genreController.genreAddGet);
 genreRouter.post('/add', genreController.genreAddPost);
 

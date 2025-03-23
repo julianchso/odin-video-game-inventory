@@ -7,5 +7,10 @@
   </head>
   <body>
     <%- include('../partials/nav.ejs') %>
+    <ul>
+      <% if (locals.genre) {%> <% genre.forEach(genre => { %>
+      <li>Genre: <%= genre.genre_name %></li>
+      <% }); %> <%}%>
+    </ul>
   </body>
 </html>

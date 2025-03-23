@@ -8,8 +8,8 @@
   <body>
     <%- include('../partials/nav.ejs') %>
     <ul>
-      <% if (locals.games) {%> <% games.forEach(game => { %>
-      <li>Game: <%= game.video_game_name %></li>
+      <% if (locals.videoGames) {%> <% videoGames.forEach(videoGame => { %>
+      <li>Game: <%= videoGame.video_game_name %></li>
       <%}); %> <%} %>
     </ul>
   </body>

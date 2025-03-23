@@ -1,6 +1,10 @@
-const genreViewGet = (req, res) => {
+import { getAllGenres } from '../db/queries.js';
+
+const genreGet = async (req, res) => {
+  const genre = await getAllGenres();
   res.render('genres/genreView', {
-    title: 'Genre',
+    title: 'Genre List',
+    genre: genre,
   });
 };
 
@@ -14,4 +18,4 @@ const genreAddPost = (req, res) => {
   const { genre } = req.body;
 };
 
-export default { genreViewGet, genreAddGet, genreAddPost };
+export default { genreGet, genreAddGet, genreAddPost };

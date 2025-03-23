@@ -5,7 +5,7 @@ const gamesGet = async (req, res) => {
   console.log(videoGames);
   res.render('games/gameView', {
     title: 'Video Games List',
-    games: videoGames,
+    videoGames: videoGames,
   });
 };
 
