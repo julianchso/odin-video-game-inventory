@@ -9,9 +9,11 @@ const gamesGet = async (req, res) => {
   });
 };
 
-const gamesAddGet = (req, res) => {
+const gamesAddGet = async (req, res) => {
+  const genre = await getAllGenres();
   res.render('games/gameAdd', {
     title: 'Add Video Game',
+    genre: genre,
   });
 };
 

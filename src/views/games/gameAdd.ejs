@@ -12,9 +12,13 @@
       <label for="videoGame">Video Game: </label>
       <input type="text" id="videoGame" name="videoGame" required />
       <div class="genre">
-        <label for="genre">Genre: </label>
         <!-- Add options for multiple genres -->
-        <input type="checkbox" id="action" name="genre" required />
+        <ul>
+          <% if (locals.genre) {%> <% genre.forEach(genre => { %>
+          <label for="genre"><%= genre.genre_name %></label>
+          <input type="checkbox" id="action" name="genre" required />
+          <% }); %> <%}%>
+        </ul>
       </div>
       <label for="gameImg">Add Game Image: </label>
       <input type="file" name="gameImg" accept="image/png, image/gif, image/jpeg" />
