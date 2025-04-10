@@ -16,13 +16,15 @@
         <ul>
           <% if (locals.genre) {%> <% genre.forEach(genre => { %>
           <label for="genre"><%= genre.genre_name %></label>
-          <input type="checkbox" id="action" name="genre" required />
+          <input type="checkbox" id="action" name="genre" />
           <% }); %> <%}%>
+          <label for="other">Other: </label>
+          <input type="text" name="other" />
         </ul>
       </div>
       <label for="gameImg">Add Game Image: </label>
       <input type="file" name="gameImg" accept="image/png, image/gif, image/jpeg" />
-      <button type="submit">Add Video Game</button>
+      <button type="submit" onClick="addNewGame">Add Video Game</button>
     </form>
   </body>
 </html>

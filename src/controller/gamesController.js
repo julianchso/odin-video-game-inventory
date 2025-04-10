@@ -19,6 +19,7 @@ const gamesAddGet = async (req, res) => {
 
 const gamesAddPost = (req, res) => {
   const { videoGame } = req.body;
+  res.redirect('/');
 };
 
 export default { gamesGet, gamesAddGet, gamesAddPost };
