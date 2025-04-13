@@ -18,7 +18,10 @@ async function getAllGenres() {
 }
 
 async function insertGenre(genre) {
-  await pool.query('INSERT INTO genre (genre_name) VALUES ($1)', [genre]);
+  await pool.query(
+    'INSERT INTO genre (genre_name) VALUES ($1) ON CONFLICT (genre_name) DO NOTHING',
+    [genre]
+  );
 }
 
 export { getAllGames, addNewGame, getAllGenres, insertGenre };

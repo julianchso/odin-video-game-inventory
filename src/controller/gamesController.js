@@ -19,6 +19,7 @@ const gamesAddGet = async (req, res) => {
 
 const gamesAddPost = (req, res) => {
   const { videoGame } = req.body;
+  // TODO: fix redirect
   res.redirect('/');
 };
 

@@ -17,6 +17,7 @@ const genreAddGet = (req, res) => {
 const genreAddPost = async (req, res) => {
   const { genre } = req.body;
   await insertGenre(genre);
+  res.redirect('/');
 };
 
 export default { genreGet, genreAddGet, genreAddPost };
