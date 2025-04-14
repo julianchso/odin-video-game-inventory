@@ -19,8 +19,11 @@ async function getAllGenres() {
 
 async function insertGenre(genre) {
   await pool.query(
-    'INSERT INTO genre (genre_name) VALUES ($1) ON CONFLICT (genre_name) DO NOTHING',
+    `INSERT INTO genre (genre_name) VALUES (LOWER($1))
+    ON CONFLICT (genre_name) DO NOTHING
+    `,
     [genre]
+    // ORDER BY genre_name
   );
 }
 
