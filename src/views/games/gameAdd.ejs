@@ -8,7 +8,7 @@
   <body>
     <%- include('../partials/nav.ejs') %>
     <h1><%= title %></h1>
-    <form action="/new" method="POST">
+    <form action="/games/add" method="POST">
       <label for="videoGame">Video Game: </label>
       <input type="text" id="videoGame" name="videoGame" required />
       <div class="genre">
@@ -16,7 +16,7 @@
         <ul>
           <% if (locals.genre) {%> <% genre.forEach(genre => { %>
           <label for="genre"><%= genre.genre_name %></label>
-          <input type="checkbox" id="action" name="genre" />
+          <input type="checkbox" id="action" name="genre" value="<%= genre.genre_name %>" />
           <% }); %> <%}%>
           <label for="other">Other: </label>
           <input type="text" name="other" />

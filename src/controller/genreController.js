@@ -1,4 +1,4 @@
-import { getAllGames, addNewGame, getAllGenres, insertGenre } from '../db/queries.js';
+import { getAllGames, addNewGame, getAllGenres, insertGenre, orderByGenre } from '../db/queries.js';
 
 const genreGet = async (req, res) => {
   const genre = await getAllGenres();
@@ -17,6 +17,7 @@ const genreAddGet = (req, res) => {
 const genreAddPost = async (req, res) => {
   const { genre } = req.body;
   await insertGenre(genre);
+  await orderByGenre();
   res.redirect('/genre');
 };
 

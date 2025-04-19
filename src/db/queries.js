@@ -2,18 +2,24 @@ import pool from './pool.js';
 
 async function getAllGames() {
   const { rows } = await pool.query('SELECT video_game_name FROM video_games');
-  console.log(rows);
+  // console.log(rows);
   return rows;
 }
 
-async function addNewGame(name, genre) {
-  await pool.query('INSERT INTO video_games (name) VALUES ($1)', [name]);
-  await pool.query('INSERT INTO genre_name (genre) VALUES ($2)', [genre]);
+async function addNewGame(name, genres) {
+  // await pool.query('INSERT INTO video_games (video_game_name) VALUES ($1)', [name]);
+  // const genreTest = await pool.query(`INSERT INTO genre (genre_name) SELECT UNNEST(?::TEXT[])`, [
+  // const videoGame = await pool.query(`SELECT video_game_id FROM video_games
+  //                   WHERE video_game_name = ${name}`);
+  // const genreTest = await pool.query(`INSERT INTO genre (genre_name) SELECT UNNEST($1::TEXT[])`, [
+  //   genres,
+  // ]);
+  // console.log(`New genre: ${genreTest}`);
 }
 
 async function getAllGenres() {
   const { rows } = await pool.query('SELECT genre_name FROM genre');
-  console.log(rows);
+  // console.log(rows);
   return rows;
 }
 
@@ -27,4 +33,12 @@ async function insertGenre(genre) {
   );
 }
 
-export { getAllGames, addNewGame, getAllGenres, insertGenre };
+async function orderByGenre() {
+  await pool.query(
+    `SELECT * FROM genre
+    ORDER BY genre_name ASC`
+  );
+  console.log('order by genre');
+}
+
+export { getAllGames, addNewGame, getAllGenres, insertGenre, orderByGenre };

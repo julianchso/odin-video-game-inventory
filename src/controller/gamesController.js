@@ -1,8 +1,7 @@
-import { getAllGames, getAllGenres } from '../db/queries.js';
+import { getAllGames, getAllGenres, addNewGame } from '../db/queries.js';
 
 const gamesGet = async (req, res) => {
   const videoGames = await getAllGames();
-  console.log(videoGames);
   res.render('games/gameView', {
     title: 'Video Games List',
     videoGames: videoGames,
@@ -18,9 +17,22 @@ const gamesAddGet = async (req, res) => {
 };
 
 const gamesAddPost = (req, res) => {
-  const { videoGame } = req.body;
-  // TODO: fix redirect
-  res.redirect('/');
+  const { videoGame, genre } = req.body;
+  const genreArr = [];
+
+  if (typeof genre == 'string') {
+    genreArr.push(genre);
+  } else {
+    for (let i = 0; i < genre.length; i++) {
+      genreArr.push(genre[i]);
+    }
+  }
+
+  console.log(`gameController: ${typeof genreArr}`);
+  console.log(`genreArr: ${genreArr}`);
+  addNewGame(videoGame, genreArr);
+  // console.log(videoGame, genre);
+  res.redirect('/games');
 };
 
 export default { gamesGet, gamesAddGet, gamesAddPost };
