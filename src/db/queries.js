@@ -14,7 +14,25 @@ async function addNewGame(name, genres) {
   // const genreTest = await pool.query(`INSERT INTO genre (genre_name) SELECT UNNEST($1::TEXT[])`, [
   //   genres,
   // ]);
-  // console.log(`New genre: ${genreTest}`);
+  const genreV2 = await pool.query(
+    `
+    INSERT INTO game_genre (video_game_id, genre_id)
+    VALUES
+
+    UNNEST(
+      (SELECT video_game_id
+      FROM video_games
+      WHERE video_game_name = $2),
+      
+      SELECT genre_id
+      FROM genre
+      WHERE genre_name IN
+      (SELECT * FROM UNNEST($1::TEXT[])
+    )
+    `,
+    [genres, name]
+  );
+  console.log(`New genre: ${genreV2}`);
 }
 
 async function getAllGenres() {

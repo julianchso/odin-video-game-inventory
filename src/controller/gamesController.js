@@ -20,16 +20,12 @@ const gamesAddPost = (req, res) => {
   const { videoGame, genre } = req.body;
   const genreArr = [];
 
-  if (typeof genre == 'string') {
-    genreArr.push(genre);
-  } else {
-    for (let i = 0; i < genre.length; i++) {
-      genreArr.push(genre[i]);
-    }
+  for (const [key, value] of Object.entries(genre)) {
+    genreArr.push(value);
   }
 
-  console.log(`gameController: ${typeof genreArr}`);
   console.log(`genreArr: ${genreArr}`);
+  console.log(`type of genreArr: ${typeof genreArr}`);
   addNewGame(videoGame, genreArr);
   // console.log(videoGame, genre);
   res.redirect('/games');
