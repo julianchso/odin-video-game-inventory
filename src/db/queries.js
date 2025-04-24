@@ -7,21 +7,39 @@ async function getAllGames() {
 }
 
 async function addNewGame(name, genres) {
-  // await pool.query('INSERT INTO video_games (video_game_name) VALUES ($1)', [name]);
+  // const genreV2 = await pool.query(
+  //   `
+  //   INSERT INTO game_genre (video_game_id, genre_id)
+  //     SELECT video_game_id, genre_id
+  // 	    FROM (SELECT video_game_id
+  // 		    FROM video_games WHERE video_game_name = 'Starcraft') AS vgact
+  // 		    CROSS JOIN (SELECT genre_id FROM genre WHERE genre_name = any(ARRAY['strategy','Action']::TEXT[])) AS ggact
+  //     ON CONFLICT (video_game_id, genre_id) DO NOTHING
+  //   `,
+  //   [genres, name]
+  // );
 
-  const genreV2 = await pool.query(
-    `
-      (
-      SELECT video_game_id, genre_id
-            FROM (SELECT video_game_id
-                  FROM video_games WHERE video_game_name = 'Starcraft') AS vgact
-                  CROSS JOIN (SELECT genre_id FROM genre WHERE genre_name = any(ARRAY['strategy','Action']::TEXT[])) AS ggact
-      )  
+  console.log(`${typeof name}: ${name}`);
+  console.log(`${typeof genres}: ${genres}`);
 
-    `,
-    [genres, name]
-  );
-  console.log(`New genre: ${genreV2}`);
+  // try {
+  //   await pool.query('INSERT INTO video_games (video_game_name) VALUES ($1)', [name]);
+  //   const genreV3 = await pool.query(
+  //     `
+  //   INSERT INTO game_genre (video_game_id, genre_id)
+  //     SELECT video_game_id, genre_id
+  // 	    FROM (SELECT video_game_id
+  // 		    FROM video_games WHERE video_game_name = $2) AS vgact
+  // 		    CROSS JOIN (SELECT genre_id FROM genre WHERE genre_name = any(ARRAY[$1]::TEXT[])) AS ggact
+  //     ON CONFLICT (video_game_id, genre_id) DO NOTHING
+  //   `,
+  //     [genres, name]
+  //   );
+
+  //   console.log(`New genre: ${genreV3}`);
+  // } catch (err) {
+  //   console.log(err);
+  // }
 }
 
 async function getAllGenres() {
