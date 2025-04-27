@@ -17,17 +17,15 @@ const gamesAddGet = async (req, res) => {
 };
 
 const gamesAddPost = (req, res) => {
-  const { videoGame, genre } = req.body;
-  const genreArr = [];
+  let { videoGame, genre } = req.body;
 
-  for (const [key, value] of Object.entries(genre)) {
-    genreArr.push(value);
+  if (typeof genre == 'string') {
+    genre = genre.split('@');
   }
 
-  console.log(`genreArr: ${genreArr}`);
-  console.log(`type of genreArr: ${typeof genreArr}`);
-  addNewGame(videoGame, genreArr);
-  // console.log(videoGame, genre);
+  console.log(`genre: ${genre}`);
+  console.log(`typeof: ${typeof genre}`);
+  addNewGame(videoGame, genre);
   res.redirect('/games');
 };
 
