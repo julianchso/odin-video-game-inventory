@@ -20,6 +20,7 @@ const gamesAddPost = (req, res) => {
   let { videoGame, genre } = req.body;
 
   if (typeof genre == 'string') {
+    // to push genre string into genre array. @ is a placeholder
     genre = genre.split('@');
   }
 
