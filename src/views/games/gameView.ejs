@@ -8,9 +8,11 @@
   <body>
     <%- include('../partials/nav.ejs') %>
     <ul>
-      <% if (locals.videoGames) {%> <% videoGames.forEach(videoGame => { %>
+      <% if (locals.videoGames) { %> <% videoGames.forEach(videoGame => { %>
       <li><%= videoGame.video_game_name %></li>
-      <%}); %> <%} %>
+      <% }); %> <% } %> <% if (locals.gamesGenre) { %> <% gamesGenre.forEach(gameGenre => { %>
+      <li><%= gameGenre.genre_name %></li>
+      <% }); %> <% } %>
     </ul>
   </body>
 </html>

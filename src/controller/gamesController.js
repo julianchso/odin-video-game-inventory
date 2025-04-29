@@ -2,9 +2,14 @@ import { getAllGames, getAllGenres, addNewGame } from '../db/queries.js';
 
 const gamesGet = async (req, res) => {
   const videoGames = await getAllGames();
+
+  const videoGamesObj = {};
+  // TODO: push array to object using reduce
+  videoGames.reduce();
+
   res.render('games/gameView', {
     title: 'Video Games List',
-    videoGames: videoGames,
+    videoGames: videoGamesObj,
   });
 };
 
@@ -24,8 +29,6 @@ const gamesAddPost = (req, res) => {
     genre = genre.split('@');
   }
 
-  console.log(`genre: ${genre}`);
-  console.log(`typeof: ${typeof genre}`);
   addNewGame(videoGame, genre);
   res.redirect('/games');
 };
