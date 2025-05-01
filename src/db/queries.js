@@ -54,7 +54,6 @@ async function orderByGenre() {
     `SELECT * FROM genre
     ORDER BY genre_name ASC`
   );
-  console.log('order by genre');
 }
 
 export { getAllGames, addNewGame, getAllGenres, insertGenre, orderByGenre };

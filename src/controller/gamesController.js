@@ -3,13 +3,20 @@ import { getAllGames, getAllGenres, addNewGame } from '../db/queries.js';
 const gamesGet = async (req, res) => {
   const videoGames = await getAllGames();
 
-  const videoGamesObj = {};
-  // TODO: push array to object using reduce
-  videoGames.reduce();
+  const videoGamesCopy = videoGames.reduce((acc, { video_game_name, genre_name }) => {
+    let existing = acc.find((item) => item.video_game_name === video_game_name);
+    if (existing) {
+      existing.genre_name.push(genre_name);
+    } else {
+      acc.push({ video_game_name, genre_name: [genre_name] });
+    }
+    return acc;
+  }, []);
 
+  console.log(videoGamesCopy);
   res.render('games/gameView', {
     title: 'Video Games List',
-    videoGames: videoGamesObj,
+    videoGames: videoGamesCopy,
   });
 };
 
