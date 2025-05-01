@@ -8,7 +8,7 @@ const gamesGet = async (req, res) => {
     if (existing) {
       existing.genre_name.push(genre_name);
     } else {
-      acc.push({ video_game_name, genre_name: [genre_name] });
+      acc.push({ video_game_name: video_game_name, genre_name: [genre_name] });
     }
     return acc;
   }, []);

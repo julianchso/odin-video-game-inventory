@@ -9,7 +9,7 @@
     <%- include('../partials/nav.ejs') %>
     <ul>
       <% if (locals.videoGames) { %> <% videoGames.forEach(videoGame => { %>
-      <li><%= videoGame.video_game_name %></li>
+      <li><%= `${videoGame.video_game_name}: [${videoGame.genre_name}]`%></li>
       <% }); %> <% } %>
     </ul>
   </body>
