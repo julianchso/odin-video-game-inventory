@@ -9,6 +9,7 @@
     <%- include('../partials/nav.ejs') %>
     <ul>
       <% if (locals.videoGames) { %> <% videoGames.forEach(videoGame => { %>
+      <!-- TODO: add foreach to loop over genre -->
       <li><%= `${videoGame.video_game_name}: [${videoGame.genre_name}]`%></li>
       <% }); %> <% } %>
     </ul>

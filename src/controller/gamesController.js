@@ -13,7 +13,6 @@ const gamesGet = async (req, res) => {
     return acc;
   }, []);
 
-  console.log(videoGamesCopy);
   res.render('games/gameView', {
     title: 'Video Games List',
     videoGames: videoGamesCopy,
