@@ -30,6 +30,15 @@ async function addNewGame(name, genres) {
   }
 }
 
+async function deleteGame(name) {
+  try {
+    const { rows } = await pool.query('DELETE FROM video_games WHERE video_game_name = $1', [name]);
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function getAllGenres() {
   const { rows } = await pool.query('SELECT genre_name FROM genre');
   return rows;
@@ -56,4 +65,4 @@ async function orderByGenre() {
   );
 }
 
-export { getAllGames, addNewGame, getAllGenres, insertGenre, orderByGenre };
+export { getAllGames, addNewGame, deleteGame, getAllGenres, insertGenre, orderByGenre };
