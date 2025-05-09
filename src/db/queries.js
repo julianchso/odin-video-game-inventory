@@ -30,6 +30,21 @@ async function addNewGame(name, genres) {
   }
 }
 
+async function getGenre(name) {
+  try {
+    const { rows } = await pool.query(
+      `SELECT genre_name FROM genre
+                                     JOIN game_genre ON game_genre.genre_id = genre.genre_id
+                                     JOIN video_games ON game_genre.video_game_id = video_games.video_game_id
+                                     WHERE video_game_name = $1`,
+      [name]
+    );
+    return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 async function deleteGame(name) {
   try {
     const { rows } = await pool.query('DELETE FROM video_games WHERE video_game_name = $1', [name]);
@@ -65,4 +80,4 @@ async function orderByGenre() {
   );
 }
 
-export { getAllGames, addNewGame, deleteGame, getAllGenres, insertGenre, orderByGenre };
+export { getAllGames, addNewGame, getGenre, deleteGame, getAllGenres, insertGenre, orderByGenre };

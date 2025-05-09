@@ -1,4 +1,4 @@
-import { getAllGames, getAllGenres, addNewGame, deleteGame } from '../db/queries.js';
+import { getAllGames, getAllGenres, getGenre, addNewGame, deleteGame } from '../db/queries.js';
 
 const gamesGet = async (req, res) => {
   const videoGames = await getAllGames();
@@ -27,6 +27,16 @@ const gamesAddGet = async (req, res) => {
   });
 };
 
+const gamesEdit = async (req, res) => {
+  const name = req.params.name;
+  const genre = getGenre(name);
+  res.render('games/gameEdit', {
+    title: name,
+    game: name,
+    genre: genre,
+  });
+};
+
 const gamesDelete = async (req, res) => {
   const name = req.params.name;
   await deleteGame(name);
@@ -45,4 +55,4 @@ const gamesAddPost = (req, res) => {
   res.redirect('/games');
 };
 
-export default { gamesGet, gamesAddGet, gamesDelete, gamesAddPost };
+export default { gamesGet, gamesAddGet, gamesEdit, gamesDelete, gamesAddPost };
