@@ -29,11 +29,14 @@ const gamesAddGet = async (req, res) => {
 
 const gamesEdit = async (req, res) => {
   const name = req.params.name;
-  const genre = getGenre(name);
+  const allGenres = await getAllGenres();
+  console.log(allGenres);
+  const genreGame = getGenre(name);
   res.render('games/gameEdit', {
     title: name,
     game: name,
-    genre: genre,
+    allGenres: allGenres,
+    genreGame: genreGame,
   });
 };
 
@@ -44,14 +47,14 @@ const gamesDelete = async (req, res) => {
 };
 
 const gamesAddPost = (req, res) => {
-  let { videoGame, genre } = req.body;
+  let { videoGame, genre, releaseYear, publisher } = req.body;
 
   if (typeof genre == 'string') {
     // to push genre string into genre array. @ is a placeholder
     genre = genre.split('@');
   }
 
-  addNewGame(videoGame, genre);
+  addNewGame(videoGame, genre, releaseYear, publisher);
   res.redirect('/games');
 };
 

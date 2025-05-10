@@ -11,9 +11,12 @@ async function getAllGames() {
   return rows;
 }
 
-async function addNewGame(name, genres) {
+async function addNewGame(name, genres, releaseYear, publisher) {
   try {
-    await pool.query('INSERT INTO video_games (video_game_name) VALUES ($1)', [name]);
+    await pool.query(
+      'INSERT INTO video_games (video_game_name, release_year, publisher) VALUES ($1, $2, $3)',
+      [name, releaseYear, publisher]
+    );
     await pool.query(
       `
       INSERT INTO game_genre (video_game_id, genre_id)

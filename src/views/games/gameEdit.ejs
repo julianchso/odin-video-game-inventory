@@ -8,5 +8,15 @@
   <body>
     <%- include('../partials/nav.ejs') %>
     <h1><%= game %></h1>
+    <form action="/:game/edit" method="POST">
+      <ul>
+        <% if (locals.allGenres) { %> <% allGenres.forEach(genre => { %>
+        <label for="genre"><%= genre.genre_name%></label>
+        <input type="checkbox" id="genre" name="genre" value="<% genre.genre_name%>" />
+        <%}); %> <%} %>
+      </ul>
+      <button type="cancel">Cancel</button>
+      <button type="submit">Submit</button>
+    </form>
   </body>
 </html>
