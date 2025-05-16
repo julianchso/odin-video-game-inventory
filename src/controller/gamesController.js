@@ -4,8 +4,8 @@ import {
   getGameGenre,
   getGameInfo,
   addNewGame,
+  postGamesEdit,
   deleteGame,
-  PostGamesEdit,
 } from '../db/queries.js';
 
 const gamesGet = async (req, res) => {
@@ -57,11 +57,18 @@ const gamesEdit = async (req, res) => {
 
 const gamesEditPost = async (req, res) => {
   try {
-    const response = req.body;
-    const checkbox = req.body['moba'];
-    console.log(`response ${response}`);
-    console.log(`checkbox: ${checkbox}`);
-    // await PostGamesEdit(name);
+    const name = req.params.name;
+    const releaseYear = req.body.releaseYear;
+    const publisher = req.body.publisher;
+    let genres = [];
+
+    for (const [key, value] of Object.entries(req.body)) {
+      if (value == 'on') {
+        genres.push(key);
+      }
+    }
+
+    await postGamesEdit(name, genres, releaseYear, publisher);
   } catch (err) {
     console.log(err);
   }

@@ -11,8 +11,8 @@
     <form action="/games/<%= game %>/edit" method="POST">
       <ul>
         <% if (locals.allGenres) { %> <% allGenres.forEach(genre => { %>
-        <label for="<% genre.genre_name%>"><%= genre.genre_name%></label>
-        <input type="checkbox" name="<% genre.genre_name%>" value="<% genre.genre_name%>" />
+        <label for="<%= genre.genre_name%>"><%= genre.genre_name%></label>
+        <input type="checkbox" name="<%= genre.genre_name%>" />
         <%}); %> <%} %>
       </ul>
       <label for="releaseYear">Release Year</label>
