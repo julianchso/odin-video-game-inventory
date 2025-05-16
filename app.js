@@ -1,4 +1,5 @@
 import express, { urlencoded } from 'express';
+import bodyParser from 'body-parser';
 import indexRouter from './src/routes/indexRouter.js';
 import gamesRouter from './src/routes/gamesRouter.js';
 import genreRouter from './src/routes/genreRouter.js';
@@ -9,8 +10,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-
 app.use(urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/src/views'));

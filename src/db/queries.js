@@ -42,6 +42,7 @@ async function getGameGenre(name) {
        WHERE video_game_name = $1`,
       [name]
     );
+    // console.log(rows);
     return rows;
   } catch (err) {
     console.log(err);
@@ -55,9 +56,20 @@ async function getGameInfo(name) {
       WHERE video_game_name = $1`,
       [name]
     );
-    console.log(`getGameInfo: name ${name}`);
-    console.log(rows);
     return rows;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function PostGamesEdit(name, genres, releaseYear, publisher) {
+  try {
+    await pool.query(
+      `UPDATE video_games
+       SET publisher = $1
+       WHERE video_game_name = $2`,
+      [publisher, name]
+    );
   } catch (err) {
     console.log(err);
   }
@@ -103,6 +115,7 @@ export {
   addNewGame,
   getGameGenre,
   getGameInfo,
+  PostGamesEdit,
   deleteGame,
   getAllGenres,
   insertGenre,

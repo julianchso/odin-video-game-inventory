@@ -5,6 +5,7 @@ import {
   getGameInfo,
   addNewGame,
   deleteGame,
+  PostGamesEdit,
 } from '../db/queries.js';
 
 const gamesGet = async (req, res) => {
@@ -35,23 +36,39 @@ const gamesAddGet = async (req, res) => {
 };
 
 const gamesEdit = async (req, res) => {
-  const name = req.params.name;
-  const allGenres = await getAllGenres();
-  const genreGame = await getGameGenre(name);
-  const gameInfo = await getGameInfo(name);
+  try {
+    const name = req.params.name;
+    const allGenres = await getAllGenres();
+    const genreGame = await getGameGenre(name);
+    const gameInfo = await getGameInfo(name);
 
-  console.log(gameInfo);
-  console.log(gameInfo[0].release_year);
-  console.log(gameInfo[0].publisher);
+    res.render('games/gameEdit', {
+      title: name,
+      game: name,
+      allGenres: allGenres,
+      genreGame: genreGame,
+      releaseYear: gameInfo[0].release_year,
+      publisher: gameInfo[0].publisher,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
 
-  res.render('games/gameEdit', {
-    title: name,
-    game: name,
-    allGenres: allGenres,
-    genreGame: genreGame,
-    releaseYear: gameInfo[0].release_year,
-    publisher: gameInfo[0].publisher,
-  });
+const gamesEditPost = async (req, res) => {
+  try {
+    const response = req.body;
+    const checkbox = req.body['moba'];
+    console.log(`response ${response}`);
+    console.log(`checkbox: ${checkbox}`);
+    // await PostGamesEdit(name);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const gamesEditCancel = (req, res) => {
+  res.redirect('/games');
 };
 
 const gamesDelete = async (req, res) => {
@@ -72,4 +89,12 @@ const gamesAddPost = (req, res) => {
   res.redirect('/games');
 };
 
-export default { gamesGet, gamesAddGet, gamesEdit, gamesDelete, gamesAddPost };
+export default {
+  gamesGet,
+  gamesAddGet,
+  gamesEdit,
+  gamesEditCancel,
+  gamesEditPost,
+  gamesDelete,
+  gamesAddPost,
+};
