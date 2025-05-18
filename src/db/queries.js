@@ -42,6 +42,7 @@ async function getGameGenre(name) {
        WHERE video_game_name = $1`,
       [name]
     );
+
     // console.log(rows);
     return rows;
   } catch (err) {

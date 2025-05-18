@@ -39,14 +39,16 @@ const gamesEdit = async (req, res) => {
   try {
     const name = req.params.name;
     const allGenres = await getAllGenres();
-    const genreGame = await getGameGenre(name);
+    const genresGame = await getGameGenre(name);
     const gameInfo = await getGameInfo(name);
+
+    console.log(genresGame);
 
     res.render('games/gameEdit', {
       title: name,
       game: name,
       allGenres: allGenres,
-      genreGame: genreGame,
+      genresGame: genresGame,
       releaseYear: gameInfo[0].release_year,
       publisher: gameInfo[0].publisher,
     });
