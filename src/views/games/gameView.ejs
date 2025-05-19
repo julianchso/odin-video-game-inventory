@@ -8,16 +8,17 @@
   <body>
     <%- include('../partials/nav.ejs') %>
     <ul>
-      <% if (locals.videoGames) { %> <% videoGames.forEach(videoGame => { %>
-      <!-- TODO: add foreach to loop over genre -->
+      <% if (locals.gameInfo) { %> <% gameInfo.forEach(videoGame => { %>
       <li><%= `${videoGame.video_game_name}: [${videoGame.genre_name}]`%></li>
+      <div><%= `Publisher: ${videoGame.publisher}`%></div>
+      <div><%= `Release Year: ${videoGame.releaseYear}`%></div>
       <form action="/games/<%= videoGame.video_game_name%>/edit" method="GET">
         <button type="submit">Edit</button>
       </form>
       <form action="/games/<%= videoGame.video_game_name%>/delete" method="POST">
         <button type="submit">Delete</button>
       </form>
-      <% }); %> <% } %>
+      <% }); %> <%}%>
     </ul>
   </body>
 </html>

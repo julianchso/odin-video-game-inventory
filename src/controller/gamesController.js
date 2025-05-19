@@ -21,11 +21,29 @@ const gamesGet = async (req, res) => {
     return acc;
   }, []);
 
-  console.log(videoGamesCopy);
+  const getGameInfos = async () => {
+    const gameInfo = [];
+
+    for (const videoGame of videoGamesCopy) {
+      try {
+        const info = await getGameInfo(videoGame.video_game_name);
+        videoGame['releaseYear'] = info[0]['release_year'];
+        videoGame['publisher'] = info[0]['publisher'];
+        gameInfo.push(videoGame);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    return gameInfo;
+  };
+
+  const gameInfos = await getGameInfos();
+  console.log(gameInfos);
 
   res.render('games/gameView', {
     title: 'Video Games List',
     videoGames: videoGamesCopy,
+    gameInfo: gameInfos,
   });
 };
 
