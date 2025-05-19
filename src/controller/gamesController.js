@@ -21,6 +21,8 @@ const gamesGet = async (req, res) => {
     return acc;
   }, []);
 
+  console.log(videoGamesCopy);
+
   res.render('games/gameView', {
     title: 'Video Games List',
     videoGames: videoGamesCopy,
@@ -71,6 +73,8 @@ const gamesEditPost = async (req, res) => {
     }
 
     await postGamesEdit(name, genres, releaseYear, publisher);
+
+    res.redirect('/games');
   } catch (err) {
     console.log(err);
   }

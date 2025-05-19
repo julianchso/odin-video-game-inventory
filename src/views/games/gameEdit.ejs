@@ -12,7 +12,7 @@
       <ul>
         <% if (locals.allGenres) { %> <% allGenres.forEach(genre => { %> <% let isChecked = false;
         genresGame.forEach(genreGame => { if (genreGame.genre_name === genre.genre_name) { isChecked
-        = true; console.log(genre)} }); %>
+        = true;} }); %>
         <li>
           <label for="<%= genre.genre_name %>"><%= genre.genre_name %></label>
           <input type="checkbox" name="<%= genre.genre_name %>" <%= isChecked ? "checked" : "" %> />

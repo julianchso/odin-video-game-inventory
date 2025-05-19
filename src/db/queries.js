@@ -65,16 +65,33 @@ async function getGameInfo(name) {
 
 async function postGamesEdit(name, genres, releaseYear, publisher) {
   try {
-    console.log(name);
-    console.log(genres);
-    console.log(releaseYear);
-    console.log(publisher);
-    // await pool.query(
-    //   `UPDATE video_games
-    //    SET publisher = $1
-    //    WHERE video_game_name = $2`,
-    //   [publisher, name]
-    // );
+    await pool.query(
+      `UPDATE video_games
+       SET publisher = $1, release_year = $2
+       WHERE video_game_name = $3`,
+      [publisher, releaseYear, name]
+    );
+
+    await pool.query(
+      `DELETE FROM game_genre
+       USING video_games
+       WHERE game_genre.video_game_id = video_games.video_game_id
+       AND video_games.video_game_name = $1
+      `,
+      [name]
+    );
+
+    await pool.query(
+      `
+      INSERT INTO game_genre (video_game_id, genre_id)
+        SELECT video_game_id, genre_id
+          FROM (SELECT video_game_id
+            FROM video_games WHERE video_game_name = $1)
+            CROSS JOIN (SELECT genre_id FROM genre WHERE genre_name = any($2::TEXT[]))
+            ON CONFLICT (video_game_id, genre_id) DO NOTHING
+            `,
+      [name, genres]
+    );
   } catch (err) {
     console.log(err);
   }
