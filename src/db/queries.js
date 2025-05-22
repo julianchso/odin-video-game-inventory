@@ -11,12 +11,8 @@ async function getAllGames() {
   return rows;
 }
 
-async function addNewGame(name, genres, releaseYear, publisher) {
+async function addGameGenres(name, genres) {
   try {
-    await pool.query(
-      'INSERT INTO video_games (video_game_name, release_year, publisher) VALUES ($1, $2, $3)',
-      [name, releaseYear, publisher]
-    );
     await pool.query(
       `
       INSERT INTO game_genre (video_game_id, genre_id)
@@ -28,6 +24,18 @@ async function addNewGame(name, genres, releaseYear, publisher) {
             `,
       [name, genres]
     );
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+async function addNewGame(name, genres, releaseYear, publisher) {
+  try {
+    await pool.query(
+      'INSERT INTO video_games (video_game_name, release_year, publisher) VALUES ($1, $2, $3)',
+      [name, releaseYear, publisher]
+    );
+    await addGameGenres(name, genres);
   } catch (err) {
     console.log(err);
   }
@@ -81,17 +89,7 @@ async function postGamesEdit(name, genres, releaseYear, publisher) {
       [name]
     );
 
-    await pool.query(
-      `
-      INSERT INTO game_genre (video_game_id, genre_id)
-        SELECT video_game_id, genre_id
-          FROM (SELECT video_game_id
-            FROM video_games WHERE video_game_name = $1)
-            CROSS JOIN (SELECT genre_id FROM genre WHERE genre_name = any($2::TEXT[]))
-            ON CONFLICT (video_game_id, genre_id) DO NOTHING
-            `,
-      [name, genres]
-    );
+    await addGameGenres(name, genres);
   } catch (err) {
     console.log(err);
   }
